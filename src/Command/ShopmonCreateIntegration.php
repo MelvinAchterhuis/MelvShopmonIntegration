@@ -79,7 +79,6 @@ class ShopmonCreateIntegration extends Command
             $this->createIntegration($integrationName);
         } catch (\Exception $e) {
             $io->error($e->getMessage());
-            $io->warning('ACL role has been removed, check error and try again.');
             return Command::FAILURE;
         }
         $io->success(sprintf('Integration with the name `%s` has been created', $integrationName));
@@ -88,10 +87,9 @@ class ShopmonCreateIntegration extends Command
             $this->assignRoleToIntegration();
         } catch (\Exception $e) {
             $io->error($e->getMessage());
-            $io->warning('Integration and ACL role have been removed, check error and try again.');
             return Command::FAILURE;
         }
-        $io->success('ACL role with has been assigned to the integration');
+        $io->success('ACL role has been assigned to the integration');
         $io->note('Credentials needs to be regenerated');
 
         return Command::SUCCESS;
